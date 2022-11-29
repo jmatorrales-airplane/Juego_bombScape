@@ -1,6 +1,6 @@
 ﻿class Table
 {
-    private int[,] size { get; set; }
+    private int[,] sizeTable { get; set; }
 
     private int[,]? bombs;
     private int[,] pos_bomb { get; set; }
@@ -16,7 +16,7 @@
 
     public void createTable(int sizeTable, int nBombs)
     {
-        this.size = new int[sizeTable, sizeTable];
+        this.sizeTable = new int[sizeTable, sizeTable];
         //createBombs(nBombs, sizeTable);
         createVictoryGate(sizeTable);
         createPositionPlayer(sizeTable);
@@ -24,12 +24,19 @@
 
     public void viewTable()
     {
-        for(int i = 0; i < size.GetLength(0); i++)
+
+        for (int i = 0; i < sizeTable.GetLength(0); i++)
         {
-            for (int j = 0; j < size.GetLength(1); j++)
+            for (int j = 0; j < sizeTable.GetLength(1); j++)
             {
-                
-                Console.Write("@");
+                if (pos_player[i,j].Equals(sizeTable[i,j]))
+                {
+                    Console.Write("X");
+                }
+                else
+                {
+                    Console.Write("@");
+                }
             }
             Console.WriteLine(""); // no tocar
         }
@@ -69,7 +76,7 @@
 
     public void deleteTable()
     {
-        size = null;
+        sizeTable = null;
         pos_bomb = null;
         pos_vict = null;
         pos_player = null;
