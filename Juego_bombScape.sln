@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juego_bombScape", "Juego_bombScape.csproj", "{9DEA8738-F08E-408C-B646-4797D1FFB3E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DEA8738-F08E-408C-B646-4797D1FFB3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEA8738-F08E-408C-B646-4797D1FFB3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEA8738-F08E-408C-B646-4797D1FFB3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEA8738-F08E-408C-B646-4797D1FFB3E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2467E412-601A-43A4-942B-92F9D693C80A}
+	EndGlobalSection
+EndGlobal
