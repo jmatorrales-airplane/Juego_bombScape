@@ -3,10 +3,9 @@
     private int[,] sizeTable { get; set; }
 
     private int[,]? bombs;
-    private int[,] pos_bomb { get; set; }
-    private int[,] pos_vict { get; set; }
-
-    public int[,] pos_player { get; set; }
+    private static int[,]? pos_bomb { get; set; }
+    private int[]? pos_vict { get; set; }
+    private static int[]? pos_player { get; set; }
 
     public string symbol_player = "X";
     public string symbol_empty = "O";
@@ -14,7 +13,7 @@
     public string symbol_bomb = "*"; // not
     public string symbol_move = "-"; // not
 
-    public void createTable(int sizeTable, int nBombs)
+    public void createTable(int sizeTable/*, int nBombs*/)
     {
         this.sizeTable = new int[sizeTable, sizeTable];
         //createBombs(nBombs, sizeTable);
@@ -24,54 +23,70 @@
 
     public void viewTable()
     {
-
         for (int i = 0; i < sizeTable.GetLength(0); i++)
         {
             for (int j = 0; j < sizeTable.GetLength(1); j++)
             {
-                if (pos_player[i,j].Equals(sizeTable[i,j]))
-                {
-                    Console.Write("X");
-                }
-                else
-                {
-                    Console.Write("@");
-                }
+                if (pos_player[0] == i && pos_player[1] == j) Console.Write("X");
+                else if (pos_vict[0] == i && pos_vict[1] == j) Console.Write("$");
+                else Console.Write("O");
             }
             Console.WriteLine(""); // no tocar
         }
     }
 
-    //private void createBombs(int sizeBombs, int positionBomb)
-    //{
-    //    //bombs = new int[sizeBombs];
-    //    for(int i = 0; i < sizeBombs; i++)
-    //    {
-    //        pos_bomb = new int[random(positionBomb), random(positionBomb)];
+    private static void createBombs(int totalNumBombs)
+    {
+        pos_bomb = new int[totalNumBombs, 2];
 
-    //        for (int j = 0; j < bombs.Count; j++)
-    //        {
-    //            if(bombs.Count == 0)
-    //            {
-    //                bombs.Add(pos_bomb[0, 0]);
-    //            }
-    //            else
-    //            {
-    //                //if (bombs.Find())
-    //                bombs = pos_bomb[0,0];
-    //            }
-    //        }
-    //    }
-    //}
+        // Creamos un bucle para crear las bombas
+        for (int i = 0; i < totalNumBombs; i++)
+        {
+            pos_bomb[i, 0] = random(totalNumBombs);
+            pos_bomb[i, 1] = random(totalNumBombs);
+
+            Console.WriteLine($"Pos_bomb {i}: " + pos_bomb[i, 0] + ", " + pos_bomb[i, 1]);
+        }
+
+        // Ordenamos la lista, solo la primera posicion para poder imprimir todas y luego con la segunda posicion
+        for (int i = 0; i < totalNumBombs; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                if (pos_bomb[j, 0] > pos_bomb[j + 1, 0])
+                {
+                    int x = pos_bomb[j, 0];
+
+                    pos_bomb[j, 0] = pos_bomb[j + 1, 0];
+                    pos_bomb[j + 1, 0] = x;
+                }
+                if (pos_bomb[j, 0] == pos_bomb[j + 1, 0] && pos_bomb[j, 1] > pos_bomb[j + 1, 1])
+                {
+                    int x = pos_bomb[j, 0];
+
+                    pos_bomb[j, 1] = pos_bomb[j + 1, 1];
+                    pos_bomb[j + 1, 1] = x;
+                }
+
+            }
+
+        }
+    }
 
     private void createVictoryGate(int sizeTable)
     {
-        pos_vict = new int[random(sizeTable), random(sizeTable)];
+        pos_vict = new int[2];
+        pos_vict[0] = random(sizeTable);
+        pos_vict[1] = random(sizeTable);
     }
 
-    private void createPositionPlayer(int sizeTable)
+    private static void createPositionPlayer(int sizeTable)
     {
-        pos_player = new int[random(sizeTable),random(sizeTable)];
+        pos_player = new int[2];
+        pos_player[0] = random(sizeTable);
+        pos_player[1] = random(sizeTable);
+
+        Console.WriteLine($"Pos_jugador: {pos_player[0]}, {pos_player[1]}");
     }
 
     public void deleteTable()
@@ -82,9 +97,9 @@
         pos_player = null;
     }
 
-    private int random(int maxTable)
-    {        
+    private static int random(int max)
+    {
         Random random = new Random();
-        return random.Next(0,maxTable);
+        return random.Next(0, max);
     }
 }

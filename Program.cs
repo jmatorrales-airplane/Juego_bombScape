@@ -36,7 +36,7 @@ class Juego_bombScape
             Console.WriteLine("");
 
             Console.WriteLine("Creando tablero\n ");
-            table.createTable(7, 4);
+            table.createTable(7/*, 4*/);
             table.viewTable();
 
         }
